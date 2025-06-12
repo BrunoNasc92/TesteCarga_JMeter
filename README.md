@@ -20,48 +20,83 @@ TesteCarga_JMeter/
 
 ---
 
-## Versões Utilizadas
-
-- **Apache JMeter**: `5.6.3`
-- **Java**: `17+`
-- **Sistema Operacional**: Windows 10
 
 ---
 
-## Dependências e Instalação
+## **🧩 Tecnologias Utilizadas**
 
-1. **Java 17 ou superior instalado**  
-   [Download Java](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-
-2. **Apache JMeter 5.6.3**  
-   Baixe e extraia:  
-   [Download JMeter](https://jmeter.apache.org/download_jmeter.cgi)
+- **Apache JMeter:** 5.6.3  
+- **Java JDK:** 17+  
+- **Sistema Operacional:** Windows 10  
+- **Execução:** Linha de comando (modo não-GUI)
 
 ---
 
-##  Como Executar os Testes
-### Passo 1 – Abrir o terminal (CMD) e navegar até a pasta `/bin` do JMeter
+## **🔗 API Testada**
 
-```bash
-cd C:\jmeter\bin
+- **URL utilizada:** `https://jsonplaceholder.typicode.com/posts`
+- **Método:** GET  
+- API pública utilizada apenas para fins de simulação e validação do fluxo.
 
-**## Passo 2 – Executar o script em modo não-GUI**
-run_test.bat
-O script run_test.bat cria a pasta results, executa o plano load_test.jmx, salva os dados em result.jtl e gera o relatório HTML.
+---
 
-**##Geração de Relatório**
-Após a execução, acesse:
-C:\jmeter\bin\results\report\index.html
+## **⚙️ Configuração do Plano de Teste**
 
-**## O relatório contém:**
+- **Usuários virtuais (Threads):** 500  
+- **Ramp-up:** 1 segundo  
+- **Duração total:** 1 minuto  
+- **Samplers utilizados:**
+  - **HTTP Request** → Chamada GET para a API
+  - **JSR223 Sampler (Groovy)** → Validação lógica da resposta (evita falsos positivos)
 
-Tempo de resposta
-Taxa de erros
-Índice APDEX
-Gráficos de desempenho
+---
 
-**## Observações**
-O teste também inclui um elemento JSR223 Assertion para validação lógica das respostas da API, evitando falsos positivos.
-Recomendado rodar novamente o teste antes de gerar um novo relatório (ou configurar para salvar em pastas com data/hora automaticamente).
+## **📦 Instalação e Execução**
+
+### **Pré-requisitos**
+
+- [✔️ Java 17 ou superior](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)  
+- [✔️ Apache JMeter 5.6.3](https://jmeter.apache.org/download_jmeter.cgi)
+
+### **Passo a passo**
+
+1. Clone este repositório:
+
+bash
+git clone https://github.com/BrunoNasc92/TesteCarga_JMeter.git
+cd TesteCarga_JMeter
+
+2. Ajuste o caminho do JMeter no run_test.bat, se necessário.
+
+3 . Execute o teste:
+bin\run_test.bat
+
+4. O relatório será gerado automaticamente em:
+results\report\index.html
+
+
+📊 Resultado da Execução
+Último Teste Registrado:
+Requisições totais: 1.000
+500 HTTP
+500 JSR223 (validação lógica)
+Erros: 0%
+Tempo médio de resposta: 88.93 ms
+APDEX: 0.999 (Excelente)
+
+📄 Evidência Documentada
+A evidência completa da execução — incluindo prints do relatório, terminal e análise técnica — está disponível em:
+evidencia/evidencia_teste_carga.pdf
+
+O documento inclui:
+
+Prints do Test Plan e configurações do JMeter
+
+Gráficos e métricas do relatório HTML
+
+Análise técnica detalhada sobre desempenho, throughput, APDEX e estabilidade
+
+📝 Considerações Finais
+Este projeto demonstra a construção de um cenário de teste de carga simples, porém eficaz, com boa cobertura de métricas, assertividade na validação das respostas e automação da geração de evidência. Pode ser estendido para incluir testes com múltiplos loops, uso de CSV para entrada de dados dinâmicos ou execução contínua em pipelines CI/CD.
 
 
